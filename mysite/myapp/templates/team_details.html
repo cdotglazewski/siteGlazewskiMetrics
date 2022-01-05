@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<head>
+    <title>{{team.name}}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'myapp/teamStyle.css' %}">
+</head>
+
+<body>
+    <h1>{{team.name}}</h1>
+    <table id="teamInfo" width="40%" class="separator">
+        <!-- <tr>
+            <th>Statistic</th>
+            <th>Offense</th>
+            <th>Defense</th>
+            <th>Nat'l Avg</th>
+        </tr>
+        <tr>
+            <td>Adj Efficiency:</td>
+            <td>{{adjStats.adjOffEff}}</td>
+            <td>{{adjStats.adjDefEff}}</td>
+            <td>{{avgNationalData.averageEfficiency}}</td>
+        </tr> -->
+    </table>
+    <table width="40%" class="separator">
+        <th>Adj Four Factors</th>
+    </table>
+    <table id="teamFourFactors" width="40%" class="heads">
+        <tr>
+            <th>Stat</th>
+            <th>Offense</th>
+            <th>Defense</th>
+            <th>Nat'l Avg</th>
+        </tr>
+        <tr>
+            <td>eFG%:</td>
+            <td>{{adjStats.adjOffEFGpct}}</td>
+            <td>{{adjStats.adjDefEFGpct}}</td>
+            <td>{{avgNationalData.eFGpct}}</td>
+        </tr>
+        <tr>
+            <td>TO%:</td>
+            <td>{{adjStats.adjTORate}}</td>
+            <td>{{adjStats.adjDefTORate}}</td>
+            <td>{{avgNationalData.turnoverRate}}</td>
+        </tr>
+        <tr>
+            <td>Off Reb%:</td>
+            <td>{{adjStats.adjORebpct}}</td>
+            <td>{{adjStats.adjDefORebpct}}</td>
+            <td>{{avgNationalData.oRebpct}}</td>
+        </tr>
+        <tr>
+            <td>FTA/FGA:</td>
+            <td>{{adjStats.adjFtaPerFga}}</td>
+            <td>{{adjStats.adjDefFtaPerFga}}</td>
+            <td>{{avgNationalData.ftaPerFga}}</td>
+        </tr>
+    </table>
+    
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Opponent</th>
+            <th>Result</th>
+            <th>Score</th>
+            <th>Tempo</th>
+            <th>Record</th>
+        </tr>
+        {% for game in completedGame %}
+        <tr>
+            <td>{{game.date}}</td>
+            <td>{{game.location}}</td>
+            <td>{{game.opponent}}</td>
+            <td>{{game.wOrL}}</td>
+            <td>{{game.teamScore}}-{{game.opponentScore}}</td>
+            <td>{{game.tempo}}</td>
+            <td>{{game.seasonWins}}-{{game.seasonLosses}}</td>
+
+        </tr>
+        {% endfor %}
+        {% for game in teamSchedule %}
+        <tr>
+            <td>{{game.date}}</td>
+            <td>{{game.location}}</td>
+            <td>{{game.opponent}}</td>
+            <td>{{game.wOrL}}</td>
+            <td>{{game.scorePrediction}}-{{game.oppScorePrediction}}</td>
+            <td>{{game.tempoPrediction}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+   
+
+    
+
+    <!-- <p>Team Name: {{team.name}}</p>
+    <p>Raw Off Eff: {{team.pointsPerPossession}}</p>
+    <p>Raw Def Eff: {{team.oppPointsPerPossession}}</p>
+    <p>Avg National OE: {{ d1avg.offensiveEfficiency }} </p>
+    <p>Adj Off Eff: {{ adjStats.adjOffEff }}</p>
+    <p>Adj Def Eff: {{ adjStats.adjDefEff }}</p>
+    <p>Raw EFG%: {{team.eFGpct}}</p>
+    <p>Adj EFG%: {{adjStats.adjOffEFGpct}}</p>
+    <p>Raw TO%: {{team.turnoverRate}}</p>
+    <p>Adj TO%: {{adjStats.adjTORate}}</p>
+    <p>Raw Opp TO%: {{team.oppTurnoverRate}}</p>
+    <p>Adj Opp TO%: {{adjStats.adjDefTORate}}</p> -->
+</body>
+
