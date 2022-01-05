@@ -37,12 +37,12 @@ def team_wins(request):
     return JsonResponse(winTotal, safe=False)
 
 def load_teams(request):
-    # initTeams()
-    # i = 0
-    # while (i < 3):
-    #     adjustStats()
-    #     i += 1
-    # getSchedules()
+    initTeams()
+    i = 0
+    while (i < 3):
+        adjustStats()
+        i += 1
+    getSchedules()
 
     
 
@@ -526,120 +526,120 @@ def initTeams():
     # # code used to get all raw team statistics and put them in the Team model
     teamNamesTest = []
     teamsToSiftThrough = Teams()
-    # for ncaaTeams in teamsToSiftThrough:
-    # # need an "if" check to see if the team already exists
-    #     testExists = Team.objects.filter(name=ncaaTeams.name).first()
-    #     if (testExists != None):
-    #         testExists.wins = ncaaTeams.wins
-    #         testExists.losses = ncaaTeams.losses
-    #         testExists.tempo = round(ncaaTeams.pace, 1)
-    #         # used to calculate points per possession
-    #         tempPointsPerGame = ncaaTeams.points / ncaaTeams.games_played
-    #         tempPPP = tempPointsPerGame / ncaaTeams.pace
-    #         testExists.pointsPerPossession = round((tempPPP * 100), 2)
-    #         # used to calculate opponent points per possesion
-    #         tempOppPointsPerGame = ncaaTeams.opp_points / ncaaTeams.games_played
-    #         tempOppPPP = tempOppPointsPerGame / ncaaTeams.pace
-    #         testExists.oppPointsPerPossession = round((tempOppPPP * 100), 2) 
-    #         testExists.efficiencyMargin = round((tempPPP * 100) - (tempOppPPP * 100), 2)
-    #         testExists.eFGpct = round((ncaaTeams.effective_field_goal_percentage * 100), 2)
-    #         testExists.oppEFGpct = round((ncaaTeams.opp_effective_field_goal_percentage * 100), 2)
-    #         testExists.turnoverRate = round(ncaaTeams.turnover_percentage, 1)
-    #         testExists.oppTurnoverRate = round(ncaaTeams.opp_turnover_percentage, 1)
-    #         testExists.oRebpct = round(ncaaTeams.offensive_rebound_percentage, 1)
-    #         testExists.oppORebpct = round(ncaaTeams.opp_offensive_rebound_percentage, 1)
-    #         testExists.ftaPerFga = round((ncaaTeams.free_throw_attempt_rate * 100), 2)
-    #         testExists.oppFtaPerFga = round((ncaaTeams.opp_free_throw_attempt_rate * 100), 2)
-    #         testExists.stealpct = round(ncaaTeams.steal_percentage, 1)
-    #         testExists.oppStealpct = round(ncaaTeams.opp_steal_percentage, 1)
-    #         testExists.assistRate = round(ncaaTeams.assist_percentage, 1)
-    #         testExists.oppAssistRate = round(ncaaTeams.opp_assist_percentage, 1)
-    #         testExists.save()
-    #     else:
-    #         tempPointsPerGame = ncaaTeams.points / ncaaTeams.games_played
-    #         tempPPP = tempPointsPerGame / ncaaTeams.pace
-    #         tempOppPointsPerGame = ncaaTeams.opp_points / ncaaTeams.games_played
-    #         tempOppPPP = tempOppPointsPerGame / ncaaTeams.pace
-    #         t = Team(
-    #             name = ncaaTeams.name, 
-    #             abbreviation = ncaaTeams.abbreviation, 
-    #             wins = ncaaTeams.wins, 
-    #             losses = ncaaTeams.losses,
-    #             tempo = round(ncaaTeams.pace, 1),
-    #             pointsPerPossession = round((tempPPP * 100), 2),
-    #             oppPointsPerPossession = round((tempOppPPP * 100), 2),
-    #             efficiencyMargin = round((tempPPP * 100) - (tempOppPPP * 100), 2),
-    #             eFGpct = round((ncaaTeams.effective_field_goal_percentage * 100), 2),
-    #             oppEFGpct = round((ncaaTeams.opp_effective_field_goal_percentage * 100), 2),
-    #             turnoverRate = round(ncaaTeams.turnover_percentage, 1),
-    #             oppTurnoverRate = round(ncaaTeams.opp_turnover_percentage, 1),
-    #             oRebpct = round(ncaaTeams.offensive_rebound_percentage, 1),
-    #             oppORebpct = round(ncaaTeams.opp_offensive_rebound_percentage, 1),
-    #             ftaPerFga = round((ncaaTeams.free_throw_attempt_rate * 100), 2),
-    #             oppFtaPerFga = round((ncaaTeams.opp_free_throw_attempt_rate * 100), 2),
-    #             stealpct = round(ncaaTeams.steal_percentage, 1),
-    #             oppStealpct = round(ncaaTeams.opp_steal_percentage, 1),
-    #             assistRate = round(ncaaTeams.assist_percentage, 1),
-    #             oppAssistRate = round(ncaaTeams.opp_assist_percentage, 1)
-    #             )
-    #         t.save()
-    #         teamNamesTest.append(ncaaTeams.name)
-    # # code used to calculate D1 averages and put them in the D1Averages model
-    # offEfficiencyTotal = 0
-    # defEfficiencyTotal = 0
-    # tempoTotal = 0
-    # eFGpctTotal = 0
-    # oppEFGpctTotal = 0
-    # toRatetotal = 0
-    # oppToRateTotal = 0
-    # oRebpctTotal = 0
-    # oppORebpctTotal = 0
-    # ftaPerFgaTotal = 0
-    # oppFtaPerFgaTotal = 0
-    # allTeamsToLoopThrough = Team.objects.all()
-    # for team in allTeamsToLoopThrough:
-    #     offEfficiencyTotal += team.pointsPerPossession
-    #     defEfficiencyTotal += team.oppPointsPerPossession
-    #     tempoTotal += team.tempo
-    #     eFGpctTotal += team.eFGpct
-    #     oppEFGpctTotal += team.oppEFGpct
-    #     toRatetotal += team.turnoverRate
-    #     oppToRateTotal += team.oppTurnoverRate
-    #     oRebpctTotal += team.oRebpct
-    #     oppORebpctTotal += team.oppORebpct
-    #     ftaPerFgaTotal += team.ftaPerFga
-    #     oppFtaPerFgaTotal += team.oppFtaPerFga
-    # if (D1Averages.objects.count() == 0):
-    #     avgs = D1Averages(
-    #         offensiveEfficiency = offEfficiencyTotal / len(allTeamsToLoopThrough),
-    #         defensiveEfficiency = defEfficiencyTotal / len(allTeamsToLoopThrough),
-    #         averageEfficiency = ((offEfficiencyTotal / len(allTeamsToLoopThrough)) + (defEfficiencyTotal / len(allTeamsToLoopThrough))) / 2,
-    #         tempo = round(tempoTotal / len(allTeamsToLoopThrough), 1),
-    #         eFGpct = eFGpctTotal / len(allTeamsToLoopThrough),
-    #         oppEFGpct = oppEFGpctTotal / len(allTeamsToLoopThrough),
-    #         turnoverRate = toRatetotal / len(allTeamsToLoopThrough),
-    #         oppTurnoverRate = oppToRateTotal / len(allTeamsToLoopThrough),
-    #         oRebpct = oRebpctTotal / len(allTeamsToLoopThrough),
-    #         oppORebpct = oppORebpctTotal / len(allTeamsToLoopThrough),
-    #         ftaPerFga = ftaPerFgaTotal / len(allTeamsToLoopThrough),
-    #         oppFtaPerFga = oppFtaPerFgaTotal / len(allTeamsToLoopThrough)
-    #     )
-    #     avgs.save()
-    # else:
-    #     dataToModify = D1Averages.objects.first()
-    #     dataToModify.offensiveEfficiency = offEfficiencyTotal / len(allTeamsToLoopThrough)
-    #     dataToModify.defensiveEfficiency = defEfficiencyTotal / len(allTeamsToLoopThrough)
-    #     dataToModify.averageEfficiency = ((offEfficiencyTotal / len(allTeamsToLoopThrough)) + (defEfficiencyTotal / len(allTeamsToLoopThrough))) / 2
-    #     dataToModify.tempo = round(tempoTotal / len(allTeamsToLoopThrough), 1)
-    #     dataToModify.eFGpct = eFGpctTotal / len(allTeamsToLoopThrough)
-    #     dataToModify.oppEFGpct = oppEFGpctTotal / len(allTeamsToLoopThrough)
-    #     dataToModify.turnoverRate = toRatetotal / len(allTeamsToLoopThrough)
-    #     dataToModify.oppTurnoverRate = oppToRateTotal / len(allTeamsToLoopThrough)
-    #     dataToModify.oRebpct = oRebpctTotal / len(allTeamsToLoopThrough)
-    #     dataToModify.oppORebpct = oppORebpctTotal / len(allTeamsToLoopThrough)
-    #     dataToModify.ftaPerFga = ftaPerFgaTotal / len(allTeamsToLoopThrough)
-    #     dataToModify.oppFtaPerFga = oppFtaPerFgaTotal / len(allTeamsToLoopThrough)
-    #     dataToModify.save()
+    for ncaaTeams in teamsToSiftThrough:
+    # need an "if" check to see if the team already exists
+        testExists = Team.objects.filter(name=ncaaTeams.name).first()
+        if (testExists != None):
+            testExists.wins = ncaaTeams.wins
+            testExists.losses = ncaaTeams.losses
+            testExists.tempo = round(ncaaTeams.pace, 1)
+            # used to calculate points per possession
+            tempPointsPerGame = ncaaTeams.points / ncaaTeams.games_played
+            tempPPP = tempPointsPerGame / ncaaTeams.pace
+            testExists.pointsPerPossession = round((tempPPP * 100), 2)
+            # used to calculate opponent points per possesion
+            tempOppPointsPerGame = ncaaTeams.opp_points / ncaaTeams.games_played
+            tempOppPPP = tempOppPointsPerGame / ncaaTeams.pace
+            testExists.oppPointsPerPossession = round((tempOppPPP * 100), 2) 
+            testExists.efficiencyMargin = round((tempPPP * 100) - (tempOppPPP * 100), 2)
+            testExists.eFGpct = round((ncaaTeams.effective_field_goal_percentage * 100), 2)
+            testExists.oppEFGpct = round((ncaaTeams.opp_effective_field_goal_percentage * 100), 2)
+            testExists.turnoverRate = round(ncaaTeams.turnover_percentage, 1)
+            testExists.oppTurnoverRate = round(ncaaTeams.opp_turnover_percentage, 1)
+            testExists.oRebpct = round(ncaaTeams.offensive_rebound_percentage, 1)
+            testExists.oppORebpct = round(ncaaTeams.opp_offensive_rebound_percentage, 1)
+            testExists.ftaPerFga = round((ncaaTeams.free_throw_attempt_rate * 100), 2)
+            testExists.oppFtaPerFga = round((ncaaTeams.opp_free_throw_attempt_rate * 100), 2)
+            testExists.stealpct = round(ncaaTeams.steal_percentage, 1)
+            testExists.oppStealpct = round(ncaaTeams.opp_steal_percentage, 1)
+            testExists.assistRate = round(ncaaTeams.assist_percentage, 1)
+            testExists.oppAssistRate = round(ncaaTeams.opp_assist_percentage, 1)
+            testExists.save()
+        else:
+            tempPointsPerGame = ncaaTeams.points / ncaaTeams.games_played
+            tempPPP = tempPointsPerGame / ncaaTeams.pace
+            tempOppPointsPerGame = ncaaTeams.opp_points / ncaaTeams.games_played
+            tempOppPPP = tempOppPointsPerGame / ncaaTeams.pace
+            t = Team(
+                name = ncaaTeams.name, 
+                abbreviation = ncaaTeams.abbreviation, 
+                wins = ncaaTeams.wins, 
+                losses = ncaaTeams.losses,
+                tempo = round(ncaaTeams.pace, 1),
+                pointsPerPossession = round((tempPPP * 100), 2),
+                oppPointsPerPossession = round((tempOppPPP * 100), 2),
+                efficiencyMargin = round((tempPPP * 100) - (tempOppPPP * 100), 2),
+                eFGpct = round((ncaaTeams.effective_field_goal_percentage * 100), 2),
+                oppEFGpct = round((ncaaTeams.opp_effective_field_goal_percentage * 100), 2),
+                turnoverRate = round(ncaaTeams.turnover_percentage, 1),
+                oppTurnoverRate = round(ncaaTeams.opp_turnover_percentage, 1),
+                oRebpct = round(ncaaTeams.offensive_rebound_percentage, 1),
+                oppORebpct = round(ncaaTeams.opp_offensive_rebound_percentage, 1),
+                ftaPerFga = round((ncaaTeams.free_throw_attempt_rate * 100), 2),
+                oppFtaPerFga = round((ncaaTeams.opp_free_throw_attempt_rate * 100), 2),
+                stealpct = round(ncaaTeams.steal_percentage, 1),
+                oppStealpct = round(ncaaTeams.opp_steal_percentage, 1),
+                assistRate = round(ncaaTeams.assist_percentage, 1),
+                oppAssistRate = round(ncaaTeams.opp_assist_percentage, 1)
+                )
+            t.save()
+            teamNamesTest.append(ncaaTeams.name)
+    # code used to calculate D1 averages and put them in the D1Averages model
+    offEfficiencyTotal = 0
+    defEfficiencyTotal = 0
+    tempoTotal = 0
+    eFGpctTotal = 0
+    oppEFGpctTotal = 0
+    toRatetotal = 0
+    oppToRateTotal = 0
+    oRebpctTotal = 0
+    oppORebpctTotal = 0
+    ftaPerFgaTotal = 0
+    oppFtaPerFgaTotal = 0
+    allTeamsToLoopThrough = Team.objects.all()
+    for team in allTeamsToLoopThrough:
+        offEfficiencyTotal += team.pointsPerPossession
+        defEfficiencyTotal += team.oppPointsPerPossession
+        tempoTotal += team.tempo
+        eFGpctTotal += team.eFGpct
+        oppEFGpctTotal += team.oppEFGpct
+        toRatetotal += team.turnoverRate
+        oppToRateTotal += team.oppTurnoverRate
+        oRebpctTotal += team.oRebpct
+        oppORebpctTotal += team.oppORebpct
+        ftaPerFgaTotal += team.ftaPerFga
+        oppFtaPerFgaTotal += team.oppFtaPerFga
+    if (D1Averages.objects.count() == 0):
+        avgs = D1Averages(
+            offensiveEfficiency = offEfficiencyTotal / len(allTeamsToLoopThrough),
+            defensiveEfficiency = defEfficiencyTotal / len(allTeamsToLoopThrough),
+            averageEfficiency = ((offEfficiencyTotal / len(allTeamsToLoopThrough)) + (defEfficiencyTotal / len(allTeamsToLoopThrough))) / 2,
+            tempo = round(tempoTotal / len(allTeamsToLoopThrough), 1),
+            eFGpct = eFGpctTotal / len(allTeamsToLoopThrough),
+            oppEFGpct = oppEFGpctTotal / len(allTeamsToLoopThrough),
+            turnoverRate = toRatetotal / len(allTeamsToLoopThrough),
+            oppTurnoverRate = oppToRateTotal / len(allTeamsToLoopThrough),
+            oRebpct = oRebpctTotal / len(allTeamsToLoopThrough),
+            oppORebpct = oppORebpctTotal / len(allTeamsToLoopThrough),
+            ftaPerFga = ftaPerFgaTotal / len(allTeamsToLoopThrough),
+            oppFtaPerFga = oppFtaPerFgaTotal / len(allTeamsToLoopThrough)
+        )
+        avgs.save()
+    else:
+        dataToModify = D1Averages.objects.first()
+        dataToModify.offensiveEfficiency = offEfficiencyTotal / len(allTeamsToLoopThrough)
+        dataToModify.defensiveEfficiency = defEfficiencyTotal / len(allTeamsToLoopThrough)
+        dataToModify.averageEfficiency = ((offEfficiencyTotal / len(allTeamsToLoopThrough)) + (defEfficiencyTotal / len(allTeamsToLoopThrough))) / 2
+        dataToModify.tempo = round(tempoTotal / len(allTeamsToLoopThrough), 1)
+        dataToModify.eFGpct = eFGpctTotal / len(allTeamsToLoopThrough)
+        dataToModify.oppEFGpct = oppEFGpctTotal / len(allTeamsToLoopThrough)
+        dataToModify.turnoverRate = toRatetotal / len(allTeamsToLoopThrough)
+        dataToModify.oppTurnoverRate = oppToRateTotal / len(allTeamsToLoopThrough)
+        dataToModify.oRebpct = oRebpctTotal / len(allTeamsToLoopThrough)
+        dataToModify.oppORebpct = oppORebpctTotal / len(allTeamsToLoopThrough)
+        dataToModify.ftaPerFga = ftaPerFgaTotal / len(allTeamsToLoopThrough)
+        dataToModify.oppFtaPerFga = oppFtaPerFgaTotal / len(allTeamsToLoopThrough)
+        dataToModify.save()
     
 
 def getSchedules():
@@ -729,86 +729,3 @@ def getSchedules():
                     wOrL = game.result
                 )
                 thisGameCompleted.save()
-    
-    # nationalAvgs = D1Averages.objects.first()
-    # averageTempo = nationalAvgs.tempo
-    # averageEfficiency = nationalAvgs.averageEfficiency
-
-    # teamsToSiftThrough = Team.objects.all()
-    # thisTeam = teamsToSiftThrough[0]
-    # teamSchedule = Schedule(thisTeam.abbreviation)
-    # for game in teamSchedule:
-    #         if (game.datetime >= datetime.today()):
-    #             # case in which the game has yet to be played, in which the predicted stats are added to the TeamSchedule table
-    #             teamORTG = thisTeam.adjOffEff
-    #             teamDRTG = thisTeam.adjDefEff
-    #             teamTempo = thisTeam.tempo
-    #             oppObject = Team.objects.get(name=game.opponent_name)
-    #             oppORTG = oppObject.adjOffEff
-    #             oppDRTG = oppObject.adjDefEff
-    #             oppTempo = oppObject.tempo
-    #             # calculating game predictions
-    #             if (game.location == "Home"):
-    #                 teamOffense = teamORTG + (.014 * teamORTG)
-    #                 teamDefense = teamDRTG - (.014 * teamDRTG)
-    #                 oppOffense = oppORTG - (.014 * oppORTG)
-    #                 oppDefense = oppDRTG + (.014 * oppDRTG)
-    #             if (game.location == "Away"):
-    #                 teamOffense = teamORTG - (.014 * teamORTG)
-    #                 teamDefense = teamDRTG + (.014 * teamDRTG)
-    #                 oppOffense = oppORTG + (.014 * oppORTG)
-    #                 oppDefense = oppDRTG - (.014 * oppDRTG)
-    #             else:
-    #                 teamOffense = teamORTG
-    #                 teamDefense = teamDRTG
-    #                 oppOffense = oppORTG
-    #                 oppDefense = oppDRTG
-    #             expectedTempo = (teamTempo * oppTempo) / averageTempo
-    #             teamOffenseThisGame = (teamOffense * oppDefense) / averageEfficiency
-    #             oppOffenseThisGame = (oppOffense * teamDefense) / averageEfficiency
-    #             teamPointsThisGame = (teamOffenseThisGame * expectedTempo) / 100
-    #             oppPointsThisGame = (oppOffenseThisGame * expectedTempo) / 100
-    #             if (teamPointsThisGame == oppPointsThisGame):
-    #                 if (game.location == "Home" or (game.location == "Neutral" and teamORTG > oppORTG)):
-    #                     teamPointsThisGame += 1
-    #                 else:
-    #                     oppPointsThisGame += 1
-    #             if (teamPointsThisGame > oppPointsThisGame):
-    #                 result = "Win"
-    #             else:
-    #                 result = "Loss"
-    #             thisGameSchedule = TeamSchedule(
-    #                 teamName = thisTeam.name,
-    #                 opponent = game.opponent_name,
-    #                 location = game.location,
-    #                 date = game.date,
-    #                 scorePrediction = round(teamPointsThisGame, 0),
-    #                 oppScorePrediction = round(oppPointsThisGame, 0),
-    #                 tempoPrediction = round(expectedTempo, 0),
-    #                 wOrL = result
-    #             )
-    #             thisGameSchedule.save()
-    #         else:
-    #             # case if the game is already completed, in which the game stats are added to the CompletedGame table
-    #             thisBoxscore = game.boxscore
-    #             if (thisBoxscore.home_offensive_rating == None):
-    #                 continue
-    #             if ((thisBoxscore.winning_name == thisTeam.name and thisBoxscore.home_offensive_rating > thisBoxscore.away_offensive_rating) or (thisBoxscore.losing_name == thisTeam.name and thisBoxscore.home_offensive_rating < thisBoxscore.away_offensive_rating)):
-    #                 teamScore = thisBoxscore.home_points
-    #                 oppScore = thisBoxscore.away_points
-    #             else:
-    #                 teamScore = thisBoxscore.away_points
-    #                 oppScore = thisBoxscore.home_points
-    #             thisGameCompleted = CompletedGame(
-    #                 teamName = thisTeam.name,
-    #                 opponent = game.opponent_name,
-    #                 location = game.location,
-    #                 date = game.date,
-    #                 tempo = round(thisBoxscore.pace, 0),
-    #                 teamScore = teamScore,
-    #                 opponentScore = oppScore,
-    #                 seasonWins = game.season_wins,
-    #                 seasonLosses = game.season_losses,
-    #                 wOrL = game.result
-    #             )
-    #             thisGameCompleted.save()
