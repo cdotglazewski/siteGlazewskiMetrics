@@ -4,7 +4,8 @@ GlazewskiMetrics is an advanced analytical college basketball ranking system. Al
 
 Code for calculating these stats rests in the views.py file.
 
-The website's design is a work in progress, with additional features coming in the future, such as:
-  Projected seeding in the NCAA tournament
-  Player stats
-  Probabilities of future outcomes on each team's schedule
+The website's design is a work in progress, with additional features coming in the future, such as: 
+
+Projected seeding in the NCAA tournament
+Player stats
+Probabilities of future outcomes on each team's schedule
